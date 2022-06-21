@@ -1,14 +1,23 @@
 import * as React from "react"
 import AvatarIcon from "../AvatarIcon/AvatarIcon"
 
-export default function TweetInput(props) {
+export default function TweetInput({ value, handleOnChange, isExpanded, setIsFocused }) {
   return (
     <div className="tweet-textarea">
       <AvatarIcon />
 
-      <textarea name="new-tweet-input" type="text" placeholder="What's Happening?"></textarea>
+      <textarea
+        name="new-tweet-input"
+        type="text"
+        onChange={handleOnChange}
+        onBlur={(e) => setIsFocused(false)}
+        onFocus={(e) => setIsFocused(true)}
+        value={value}
+        placeholder="What's Happening?"
+        className={isExpanded ? "expanded" : ""}
+      ></textarea>
 
-      <SmileIcon />
+      {isExpanded ? <SmileIcon /> : <ImageIcon />}
     </div>
   )
 }
